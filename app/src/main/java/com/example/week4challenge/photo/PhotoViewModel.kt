@@ -4,19 +4,35 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.android.volley.RequestQueue
 import com.example.week4challenge.model.Photo
-import com.example.week4challenge.repository.MainRepository
+import com.example.week4challenge.repository.PhotosRepository
+import androidx.databinding.ObservableBoolean
+import androidx.lifecycle.viewModelScope
+import com.example.week4challenge.util.AppResult
+import com.example.week4challenge.util.SingleLiveEvent
+import kotlinx.coroutines.launch
 
-class PhotoViewModel (var mRequestQueue: RequestQueue): ViewModel(){
 
-    var localposts =  MutableLiveData<ArrayList<Photo>>() //this mutable will store local data
-    var onlineposts =  MutableLiveData<ArrayList<Photo>>() //stores data retrieved from server
-    var mainRepository = MainRepository(mRequestQueue) //initializing the MainRepository
+class PhotoViewModel(private val repository: PhotosRepository) : ViewModel() {
 
-    init{
-        localposts.value = mainRepository.getData()  //fetching local data
-        mainRepository.fetchOnlineData() //fetching online data
-        onlineposts = mainRepository.photos //updating the onlineposts array with new data
+    val showLoading = ObservableBoolean()
+    val photoList = MutableLiveData<List<Photo>?>()
+    val showError = SingleLiveEvent<String?>()
+
+    fun getAllPhotos() {
+        showLoading.set(true)
+        viewModelScope.launch {
+            val result = repository.getAllPhotos()
+            showLoading.set(false)
+            when (result) {
+                is AppResult.Success -> {
+                    photoList.value = result.successData
+                    showError.value = null
+
+                }
+                is AppResult.Error -> showError.value = result.exception.message
+
+            }
+        }
     }
-
 
 }
