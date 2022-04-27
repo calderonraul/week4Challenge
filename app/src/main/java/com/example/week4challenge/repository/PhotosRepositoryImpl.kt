@@ -17,10 +17,12 @@ class PhotosRepositoryImpl (private val api: PhotosApi,private val context: Cont
     override suspend fun getAllPhotos(): AppResult<List<Photo>> {
         if (isOnline(context)){
             return try {
-                val response=api.getAllPhotos()
+                val response=api.getAllPhotos(100)
                 if(response.isSuccessful){
                     response.body()?.let {
                         withContext(Dispatchers.IO){dao.add(it)}
+                        Log.d("SAPA", "agregue esto: $it")
+
                     }
                     handleSuccess(response)
                 }else{
