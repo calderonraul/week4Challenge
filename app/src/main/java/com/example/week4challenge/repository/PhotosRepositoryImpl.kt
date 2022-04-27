@@ -21,7 +21,7 @@ class PhotosRepositoryImpl (private val api: PhotosApi,private val context: Cont
                 if(response.isSuccessful){
                     response.body()?.let {
                         withContext(Dispatchers.IO){dao.add(it)}
-                        Log.d("SAPA", "agregue esto: $it")
+                        Log.d("pasti", "agregue esto: $it")
 
                     }
                     handleSuccess(response)

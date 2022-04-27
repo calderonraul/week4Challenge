@@ -18,6 +18,6 @@ data class Photo(
     val title:String,
     @ColumnInfo(name = "url")
     val url:String,
-    @ColumnInfo(name = "thumbnail")
-    val thumbnail:String
+    @ColumnInfo(name = "thumbnailUrl")
+    val thumbnailUrl:String?
 ):Parcelable{}

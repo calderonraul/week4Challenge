@@ -7,7 +7,7 @@ import androidx.room.TypeConverters
 import com.example.week4challenge.model.Photo
 
 @Database(
-    entities = [Photo::class],version = 1,exportSchema = false
+    entities = [Photo::class],version = 3,exportSchema = false
 )
 @TypeConverters(Converters::class)
 abstract class PhotosDatabase : RoomDatabase(){
