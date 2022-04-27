@@ -1,8 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/photoFragment">
 
+
+    <fragment
+        android:id="@+id/photoFragment"
+        android:name="com.example.week4challenge.photo.PhotoFragment"
+        android:label="PhotoFragment" >
+        <action
+            android:id="@+id/action_photoFragment_to_photoDetailFragment"
+            app:destination="@id/photoDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/photoDetailFragment"
+        android:name="com.example.week4challenge.photodetail.PhotoDetailFragment"
+        android:label="photo_detail_fragment"
+        tools:layout="@layout/photo_detail_fragment" />
 
 
 </navigation>

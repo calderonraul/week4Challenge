@@ -1,6 +1,5 @@
 package com.example.week4challenge.repository
 
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.util.Log
 import com.example.week4challenge.database.PhotosDAO
@@ -13,7 +12,6 @@ import com.example.week4challenge.util.handleSuccess
 import com.example.week4challenge.util.noNetworkConnectivityError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.lang.Exception
 
 class PhotosRepositoryImpl (private val api: PhotosApi,private val context: Context,private val dao: PhotosDAO):PhotosRepository{
     override suspend fun getAllPhotos(): AppResult<List<Photo>> {
