@@ -36,6 +36,7 @@ class PhotoAdapter(val context: Context?, val clickListener: PhotoClickListener)
         fun onBind(position: Int){
             val row = photoList[position]
             viewBinding.photo=row
+            viewBinding.imgPortada
             viewBinding.photoClickListenerInterface=clickListener
         }
     }
