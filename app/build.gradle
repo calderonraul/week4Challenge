@@ -100,6 +100,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.3.1'
     implementation 'androidx.cardview:cardview:1.0.0'
 
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
 
     implementation 'androidx.core:core-ktx:1.7.0'

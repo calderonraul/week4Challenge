@@ -18,10 +18,6 @@ import com.example.week4challenge.util.replaceFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
-
 class PhotoFragment : Fragment(), PhotoClickListener {
 
     private val photoViewModel by viewModel<PhotoViewModel>()
@@ -44,6 +40,18 @@ class PhotoFragment : Fragment(), PhotoClickListener {
         super.onActivityCreated(savedInstanceState)
         setView()
         mViewDataBinding.viewModel = photoViewModel
+        loadContent()
+
+        mViewDataBinding.swipeRefreshLayout.setOnRefreshListener {
+            loadContent()
+            mViewDataBinding.swipeRefreshLayout.isRefreshing = false
+        }
+
+
+    }
+
+
+    private fun loadContent() {
         photoViewModel.getAllPhotos()
         photoViewModel.photoList.observe(viewLifecycleOwner, Observer {
             Log.wtf("@@photos", it!!.size.toString())
@@ -52,7 +60,6 @@ class PhotoFragment : Fragment(), PhotoClickListener {
             }
 
         })
-
     }
 
     private fun setView() {

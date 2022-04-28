@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="photo"
             type="com.example.week4challenge.model.Photo" />
+
         <variable
             name="photoClickListenerInterface"
             type="com.example.week4challenge.photo.PhotoClickListener" />
@@ -20,52 +20,34 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="20dp"
-        card_view:cardElevation="3dp"
+        android:layout_margin="@dimen/cardview_layout_margin"
+        app:cardCornerRadius="@dimen/corner_radius"
+        app:cardElevation="@dimen/card_elevation"
+        app:cardMaxElevation="@dimen/card_maximus_elevation"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
         android:onClick="@{() -> photoClickListenerInterface.onItemClick(photo)}"
+
         card_view:layout_constraintEnd_toEndOf="parent"
         card_view:layout_constraintStart_toStartOf="parent"
         card_view:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
 
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/img_portada"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background"
+            app:imgURL="@{photo.thumbnailUrl}" />
 
-            <ImageView
-                android:id="@+id/img_portada"
-                app:imgURL="@{photo.thumbnailUrl}"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background" />
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{photo.title}"
+            android:textColor="#000000"
+            android:textSize="20sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/caratula_tamaño"
-                android:background="#6A1D1D1D"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{photo.title}"
-                    android:textColor="#FFFFFF"
-                    android:textSize="@dimen/movie_title" />
-
-            </LinearLayout>
-        </RelativeLayout>
-
-    </LinearLayout>
     </androidx.cardview.widget.CardView>
 </layout>

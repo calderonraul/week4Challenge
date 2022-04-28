@@ -3,9 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/rauli/AndroidStudioProjects/week4Challenge/app/src/main/res/layout/activity_main.xml" value="0.18840579710144928" />
         <entry key="..\:/Users/rauli/AndroidStudioProjects/week4Challenge/app/src/main/res/layout/fragment_photo.xml" value="0.3489583333333333" />
-        <entry key="..\:/Users/rauli/AndroidStudioProjects/week4Challenge/app/src/main/res/layout/photo_adapter.xml" value="0.1" />
-        <entry key="..\:/Users/rauli/AndroidStudioProjects/week4Challenge/app/src/main/res/layout/photo_detail_fragment.xml" value="0.1" />
+        <entry key="..\:/Users/rauli/AndroidStudioProjects/week4Challenge/app/src/main/res/layout/photo_adapter.xml" value="0.33" />
+        <entry key="..\:/Users/rauli/AndroidStudioProjects/week4Challenge/app/src/main/res/layout/photo_detail_fragment.xml" value="0.33" />
         <entry key="app/src/main/res/drawable/ic_broken_image.xml" value="0.117" />
         <entry key="app/src/main/res/drawable/loading_img.xml" value="0.117" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3380208333333333" />
