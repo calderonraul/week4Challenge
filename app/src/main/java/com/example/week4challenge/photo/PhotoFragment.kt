@@ -22,7 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
 
-class PhotoFragment : Fragment(),PhotoClickListener {
+class PhotoFragment : Fragment(), PhotoClickListener {
 
     private val photoViewModel by viewModel<PhotoViewModel>()
     private lateinit var photoAdapter: PhotoAdapter
@@ -32,9 +32,10 @@ class PhotoFragment : Fragment(),PhotoClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mViewDataBinding=DataBindingUtil.inflate(inflater,R.layout.fragment_photo,container,false)
-        val mRootView=mViewDataBinding.root
-        mViewDataBinding.lifecycleOwner=this
+        mViewDataBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_photo, container, false)
+        val mRootView = mViewDataBinding.root
+        mViewDataBinding.lifecycleOwner = this
         return mRootView
 
     }
@@ -42,11 +43,11 @@ class PhotoFragment : Fragment(),PhotoClickListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setView()
-        mViewDataBinding.viewModel=photoViewModel
+        mViewDataBinding.viewModel = photoViewModel
         photoViewModel.getAllPhotos()
         photoViewModel.photoList.observe(viewLifecycleOwner, Observer {
-            Log.wtf("@@photos",it!!.size.toString())
-            if (it.isNotEmpty()){
+            Log.wtf("@@photos", it!!.size.toString())
+            if (it.isNotEmpty()) {
                 photoAdapter.setPhotos(it)
             }
 
@@ -54,18 +55,23 @@ class PhotoFragment : Fragment(),PhotoClickListener {
 
     }
 
-    private fun setView(){
+    private fun setView() {
 
-        photoAdapter= PhotoAdapter(context,this)
-        mViewDataBinding.rvPhotos.layoutManager=LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
-        mViewDataBinding.rvPhotos.adapter=photoAdapter
-        mViewDataBinding.rvPhotos.isNestedScrollingEnabled=false
+        photoAdapter = PhotoAdapter(context, this)
+        mViewDataBinding.rvPhotos.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        mViewDataBinding.rvPhotos.adapter = photoAdapter
+        mViewDataBinding.rvPhotos.isNestedScrollingEnabled = false
 
 
     }
 
     override fun onItemClick(photo: Photo) {
-        //(activity as MainActivity).replaceFragment(PhotoDetailFragment.newInstance(photo),R.id.fragment_container,"photoDetails")
+        (activity as MainActivity).replaceFragment(
+            PhotoDetailFragment.newInstance(photo),
+            R.id.fragment_container,
+            "photoDetails"
+        )
     }
 
 

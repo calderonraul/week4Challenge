@@ -13,9 +13,14 @@ class PhotoAdapter(val context: Context?, val clickListener: PhotoClickListener)
     RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder>() {
 
     var photoList: List<Photo> = ArrayList()
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoAdapter.PhotoViewHolder {
-        val viewBinding:PhotoAdapterBinding=DataBindingUtil.inflate(LayoutInflater.from(parent.context),
-            R.layout.photo_adapter,parent,false)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): PhotoAdapter.PhotoViewHolder {
+        val viewBinding: PhotoAdapterBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            R.layout.photo_adapter, parent, false
+        )
         return PhotoViewHolder(viewBinding)
     }
 
@@ -26,18 +31,19 @@ class PhotoAdapter(val context: Context?, val clickListener: PhotoClickListener)
     override fun getItemCount(): Int {
         return photoList.size
     }
-    fun setPhotos(photos:List<Photo>){
-        this.photoList=photos
+
+    fun setPhotos(photos: List<Photo>) {
+        this.photoList = photos
         notifyDataSetChanged()
     }
 
     inner class PhotoViewHolder(private val viewBinding: PhotoAdapterBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
-        fun onBind(position: Int){
+        fun onBind(position: Int) {
             val row = photoList[position]
-            viewBinding.photo=row
+            viewBinding.photo = row
             viewBinding.imgPortada
-            viewBinding.photoClickListenerInterface=clickListener
+            viewBinding.photoClickListenerInterface = clickListener
         }
     }
 }

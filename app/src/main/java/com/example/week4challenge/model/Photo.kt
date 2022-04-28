@@ -8,16 +8,16 @@ import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
-@Entity (tableName = "photos_table")
+@Entity(tableName = "photos_table")
 data class Photo(
     @ColumnInfo(name = "album_id")
-    val albumId:Int,
+    val albumId: Int,
     @PrimaryKey(autoGenerate = true)
-    val id:Int,
+    val id: Int,
     @ColumnInfo(name = "title")
-    val title:String,
+    val title: String,
     @ColumnInfo(name = "url")
-    val url:String,
+    val url: String,
     @ColumnInfo(name = "thumbnailUrl")
-    val thumbnailUrl:String?
-):Parcelable{}
+    val thumbnailUrl: String?
+) : Parcelable {}

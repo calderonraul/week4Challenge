@@ -10,8 +10,8 @@ import com.example.week4challenge.model.Photo
 @Dao
 interface PhotosDAO {
     @Query("SELECT * FROM  photos_table")
-    fun findAll():List<Photo>
+    fun findAll(): List<Photo>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun add(photo:List<Photo>)
+    fun add(photo: List<Photo>)
 }

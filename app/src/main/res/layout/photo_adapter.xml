@@ -2,7 +2,9 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    >
 
     <data>
 
@@ -13,6 +15,19 @@
             name="photoClickListenerInterface"
             type="com.example.week4challenge.photo.PhotoClickListener" />
     </data>
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        card_view:cardElevation="3dp"
+        android:onClick="@{() -> photoClickListenerInterface.onItemClick(photo)}"
+        card_view:layout_constraintEnd_toEndOf="parent"
+        card_view:layout_constraintStart_toStartOf="parent"
+        card_view:layout_constraintTop_toTopOf="parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,4 +67,5 @@
         </RelativeLayout>
 
     </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </layout>

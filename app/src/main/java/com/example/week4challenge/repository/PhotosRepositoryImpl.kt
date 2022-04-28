@@ -13,37 +13,41 @@ import com.example.week4challenge.util.noNetworkConnectivityError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class PhotosRepositoryImpl (private val api: PhotosApi,private val context: Context,private val dao: PhotosDAO):PhotosRepository{
+class PhotosRepositoryImpl(
+    private val api: PhotosApi,
+    private val context: Context,
+    private val dao: PhotosDAO
+) : PhotosRepository {
     override suspend fun getAllPhotos(): AppResult<List<Photo>> {
-        if (isOnline(context)){
+        if (isOnline(context)) {
             return try {
-                val response=api.getAllPhotos(100)
-                if(response.isSuccessful){
+                val response = api.getAllPhotos(100)
+                if (response.isSuccessful) {
                     response.body()?.let {
-                        withContext(Dispatchers.IO){dao.add(it)}
-                        Log.d("pasti", "agregue esto: $it")
+                        withContext(Dispatchers.IO) { dao.add(it) }
+                        Log.d("xd", "agregue esto: $it")
 
                     }
                     handleSuccess(response)
-                }else{
+                } else {
                     handleApiError(response)
                 }
-            }catch (e:Exception){
+            } catch (e: Exception) {
                 AppResult.Error(e)
             }
-        }else{
-            val data=getPhotosFromCache()
-            return if(data.isNotEmpty()){
-                Log.d("XD","from db")
+        } else {
+            val data = getPhotosFromCache()
+            return if (data.isNotEmpty()) {
+                Log.d("XD", "from db")
                 AppResult.Success(data)
-            }else{
+            } else {
                 context.noNetworkConnectivityError()
             }
         }
     }
 
-    private suspend fun getPhotosFromCache():List<Photo>{
-        return withContext(Dispatchers.IO){
+    private suspend fun getPhotosFromCache(): List<Photo> {
+        return withContext(Dispatchers.IO) {
             dao.findAll()
         }
     }

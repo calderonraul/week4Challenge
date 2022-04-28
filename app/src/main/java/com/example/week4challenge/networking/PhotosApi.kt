@@ -7,5 +7,5 @@ import retrofit2.http.Query
 
 interface PhotosApi {
     @GET("/photos")
-    suspend fun getAllPhotos(@Query("_limit")limit:Int?):Response<List<Photo>>
+    suspend fun getAllPhotos(@Query("_limit") limit: Int?): Response<List<Photo>>
 }
