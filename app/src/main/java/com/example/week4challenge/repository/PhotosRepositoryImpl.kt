@@ -38,9 +38,11 @@ class PhotosRepositoryImpl(
         } else {
             val data = getPhotosFromCache()
             return if (data.isNotEmpty()) {
+                // TODO: remove not neccesary logs or use timber if you need to track any information in lgos
                 Log.d("XD", "from db")
                 AppResult.Success(data)
             } else {
+                // TODO: is not good to hve context in repositories since are just business logic, there is a provider to know the network state but in this case, could be better a catch for the exceptions
                 context.noNetworkConnectivityError()
             }
         }

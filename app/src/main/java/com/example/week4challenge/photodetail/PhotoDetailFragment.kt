@@ -20,6 +20,7 @@ class PhotoDetailFragment : Fragment() {
         fun newInstance(data: Photo) = PhotoDetailFragment().apply {
             arguments = Bundle().apply {
                 putParcelable("photo_data", data)
+                // TODO: please dont user hardcode string use a connstant in this cases
             }
         }
     }
@@ -30,6 +31,7 @@ class PhotoDetailFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        // TODO: please dont user hardcode string use a connstant in this cases
         photo = arguments?.getParcelable("photo_data")
 
         photo?.let { Log.d("detalle", it.title) }
@@ -49,6 +51,7 @@ class PhotoDetailFragment : Fragment() {
         return mRootView
     }
 
+    // TODO: this functions has been deprecated you can do this in a observable or in view created. function
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
