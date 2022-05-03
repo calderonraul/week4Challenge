@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.week4challenge.R
 import com.example.week4challenge.databinding.PhotoAdapterBinding
-import com.example.week4challenge.model.Photo
+import com.example.data.model.Photo
 
 class PhotoAdapter(val context: Context?, val clickListener: PhotoClickListener) :
     RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder>() {

@@ -3,14 +3,11 @@ package com.example.week4challenge.di
 import android.app.Application
 import android.content.Context
 import androidx.room.Room
+import com.example.domain.repository.PhotosRepository
+import com.example.data.api.PhotosApi
 import com.example.week4challenge.BuildConfig.DEBUG
 import com.example.week4challenge.R
-import com.example.week4challenge.database.PhotosDAO
-import com.example.week4challenge.database.PhotosDatabase
-import com.example.week4challenge.networking.PhotosApi
 import com.example.week4challenge.photo.PhotoViewModel
-import com.example.week4challenge.repository.PhotosRepository
-import com.example.week4challenge.repository.PhotosRepositoryImpl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
@@ -26,20 +23,21 @@ import java.util.concurrent.TimeUnit
 
 
 val apiModule= module {
-    fun provideCountriesApi(retrofit: Retrofit):PhotosApi{
+    fun provideCountriesApi(retrofit: Retrofit): PhotosApi {
         return retrofit.create(PhotosApi::class.java)
     }
     single { provideCountriesApi(get()) }
 }
 
 val databaseModule= module {
-    fun provideDatabase(application: Application):PhotosDatabase{
-        return Room.databaseBuilder(application,PhotosDatabase::class.java,"photos")
+    fun provideDatabase(application: Application): com.example.data.database.PhotosDatabase {
+        return Room.databaseBuilder(application,
+            com.example.data.database.PhotosDatabase::class.java,"photos")
             .fallbackToDestructiveMigration()
             .build()
     }
 
-    fun providePhotosDao(database: PhotosDatabase):PhotosDAO{
+    fun providePhotosDao(database: com.example.data.database.PhotosDatabase): com.example.data.database.PhotosDAO {
         return database.photosDao
     }
     single { provideDatabase(androidApplication()) }
@@ -81,8 +79,8 @@ val networkModule= module {
 }
 
 val repositoryModule= module {
-    fun providePhotosRepository(api: PhotosApi,context:Context,dao: PhotosDAO):PhotosRepository{
-        return PhotosRepositoryImpl(api,context,dao)
+    fun providePhotosRepository(api: PhotosApi, context:Context, dao: com.example.data.database.PhotosDAO): com.example.domain.repository.PhotosRepository {
+        return com.example.data.PhotosRepositoryImpl(api, context, dao)
     }
     single { providePhotosRepository(get(),androidContext(),get()) }
 }

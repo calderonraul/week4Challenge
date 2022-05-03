@@ -9,7 +9,7 @@
 
         <variable
             name="photo"
-            type="com.example.week4challenge.model.Photo" />
+            type="com.example.data.model.Photo" />
 
         <variable
             name="photoClickListenerInterface"

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.week4challenge.MainActivity
 import com.example.week4challenge.R
 import com.example.week4challenge.databinding.FragmentPhotoBinding
-import com.example.week4challenge.model.Photo
+import com.example.data.model.Photo
 import com.example.week4challenge.photodetail.PhotoDetailFragment
 import com.example.week4challenge.util.replaceFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
