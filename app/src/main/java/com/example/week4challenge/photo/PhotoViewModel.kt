@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 
 class PhotoViewModel(private val repository: PhotosRepository) : ViewModel() {
-
+    // this onservable could be private
     val showLoading = ObservableBoolean()
     val photoList = MutableLiveData<List<Photo>?>()
     val showError = SingleLiveEvent<String?>()
@@ -27,7 +27,6 @@ class PhotoViewModel(private val repository: PhotosRepository) : ViewModel() {
                 is AppResult.Success -> {
                     photoList.value = result.successData
                     showError.value = null
-
                 }
                 is AppResult.Error -> showError.value = result.exception.message
 

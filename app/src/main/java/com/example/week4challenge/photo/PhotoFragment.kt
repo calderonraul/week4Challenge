@@ -46,14 +46,12 @@ class PhotoFragment : Fragment(), PhotoClickListener {
             loadContent()
             mViewDataBinding.swipeRefreshLayout.isRefreshing = false
         }
-
-
     }
-
 
     private fun loadContent() {
         photoViewModel.getAllPhotos()
         photoViewModel.photoList.observe(viewLifecycleOwner, Observer {
+            // I know its a log, but please dont use bang bang operator. (!!)
             Log.wtf("@@photos", it!!.size.toString())
             if (it.isNotEmpty()) {
                 photoAdapter.setPhotos(it)
@@ -79,6 +77,7 @@ class PhotoFragment : Fragment(), PhotoClickListener {
             R.id.fragment_container,
             "photoDetails"
         )
+        // please make this string a constant string
     }
 
 
