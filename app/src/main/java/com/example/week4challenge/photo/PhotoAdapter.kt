@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.week4challenge.R
 import com.example.week4challenge.databinding.PhotoAdapterBinding
 import com.example.data.model.Photo
+import com.example.domain.entity.PhotoDomain
 
 class PhotoAdapter(val context: Context?, val clickListener: PhotoClickListener) :
     RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder>() {
 
-    var photoList: List<Photo> = ArrayList()
+    var photoList: List<PhotoDomain> = ArrayList()
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -32,7 +33,7 @@ class PhotoAdapter(val context: Context?, val clickListener: PhotoClickListener)
         return photoList.size
     }
 
-    fun setPhotos(photos: List<Photo>) {
+    fun setPhotos(photos: List<PhotoDomain>) {
         this.photoList = photos
         notifyDataSetChanged()
     }

@@ -9,12 +9,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.week4challenge.MainActivity
 import com.example.week4challenge.R
 import com.example.week4challenge.databinding.FragmentPhotoBinding
-import com.example.data.model.Photo
-import com.example.week4challenge.photodetail.PhotoDetailFragment
-import com.example.week4challenge.util.replaceFragment
+import com.example.domain.entity.PhotoDomain
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -71,12 +68,13 @@ class PhotoFragment : Fragment(), PhotoClickListener {
 
     }
 
-    override fun onItemClick(photo: Photo) {
+    override fun onItemClick(photo: PhotoDomain) {
+        /*
         (activity as MainActivity).replaceFragment(
             PhotoDetailFragment.newInstance(photo),
             R.id.fragment_container,
             "photoDetails"
-        )
+        )*/
         // please make this string a constant string
     }
 

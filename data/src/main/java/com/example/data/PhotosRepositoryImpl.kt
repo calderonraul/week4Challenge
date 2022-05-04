@@ -2,13 +2,13 @@ package com.example.data
 
 import android.content.Context
 import com.example.data.api.PhotosApi
-import com.example.data.model.Photo
-import com.example.data.util.AppResult
-import com.example.data.util.NetworkManager.isOnline
-import com.example.data.util.handleApiError
-import com.example.data.util.handleSuccess
+import com.example.domain.entity.PhotoDomain
+import com.example.utils.util.AppResult
+import com.example.utils.util.NetworkManager.isOnline
+import com.example.utils.util.handleApiError
+import com.example.utils.util.handleSuccess
 import com.example.domain.repository.PhotosRepository
-import com.example.week4challenge.util.noNetworkConnectivityError
+import com.example.utils.util.noNetworkConnectivityError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -17,7 +17,7 @@ class PhotosRepositoryImpl(
     private val context: Context,
     private val dao: com.example.data.database.PhotosDAO
 ) : PhotosRepository {
-    override suspend fun getAllPhotos(): AppResult<List<Photo>> {
+    override suspend fun getAllPhotos(): AppResult<List<PhotoDomain>> {
         if (isOnline(context)) {
             return try {
                 val response = api.getAllPhotos(100)
@@ -44,7 +44,7 @@ class PhotosRepositoryImpl(
         }
     }
 
-    private suspend fun getPhotosFromCache(): List<Photo> {
+    private suspend fun getPhotosFromCache(): List<PhotoDomain> {
         return withContext(Dispatchers.IO) {
             dao.findAll()
         }

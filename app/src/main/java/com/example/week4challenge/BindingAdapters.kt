@@ -1,6 +1,5 @@
 package com.example.week4challenge
 
-import android.util.Log
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -11,7 +10,6 @@ import com.bumptech.glide.request.RequestOptions
 
 @BindingAdapter("imgURL")
 fun loadImage(view: ImageView, IMGurl: String) {
-    Log.wtf("equisDe",IMGurl)
 
 
     IMGurl.let {

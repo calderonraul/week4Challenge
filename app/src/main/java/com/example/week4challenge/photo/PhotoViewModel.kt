@@ -6,23 +6,25 @@ import com.example.data.model.Photo
 
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.viewModelScope
+import com.example.domain.entity.PhotoDomain
 import com.example.domain.repository.PhotosRepository
-import com.example.data.util.AppResult
+import com.example.domain.useCases.GetAllPhotosUseCase
+import com.example.utils.util.AppResult
 
-import com.example.data.util.SingleLiveEvent
+import com.example.utils.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 
 
-class PhotoViewModel(private val repository: com.example.domain.repository.PhotosRepository) : ViewModel() {
+class PhotoViewModel(private val repository: GetAllPhotosUseCase) : ViewModel() {
     // this onservable could be private
     val showLoading = ObservableBoolean()
-    val photoList = MutableLiveData<List<Photo>?>()
+    val photoList = MutableLiveData<List<PhotoDomain>?>()
     val showError = SingleLiveEvent<String?>()
 
     fun getAllPhotos() {
         showLoading.set(true)
         viewModelScope.launch {
-            val result = repository.getAllPhotos()
+            val result = repository.invoke()
             showLoading.set(false)
             when (result) {
                 is AppResult.Success -> {

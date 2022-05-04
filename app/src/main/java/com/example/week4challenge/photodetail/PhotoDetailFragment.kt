@@ -11,18 +11,19 @@ import androidx.databinding.DataBindingUtil
 import com.example.week4challenge.R
 import com.example.week4challenge.databinding.PhotoDetailFragmentBinding
 import com.example.data.model.Photo
+import com.example.domain.entity.PhotoDomain
 
 class PhotoDetailFragment : Fragment() {
 
-    companion object {
+    /*companion object {
         @JvmStatic
-        fun newInstance(data: Photo) = PhotoDetailFragment().apply {
+        fun newInstance(data: PhotoDomain) = PhotoDetailFragment().apply {
             arguments = Bundle().apply {
                 putParcelable("photo_data", data)
                 // TODO: please dont user hardcode string use a connstant in this cases
             }
         }
-    }
+    }*/
 
     private var photo: Photo? = null
     private lateinit var mViewDataBinding: PhotoDetailFragmentBinding
@@ -31,7 +32,7 @@ class PhotoDetailFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         // TODO: please dont user hardcode string use a connstant in this cases
-        photo = arguments?.getParcelable("photo_data")
+       // photo = arguments?.getParcelable("photo_data")
 
         photo?.let { Log.d("detalle", it.title) }
     }

@@ -1,6 +1,5 @@
-package com.example.data.util
+package com.example.utils.util
 
-import com.example.data.util.ApiErrorUtils
 import retrofit2.Response
 
 /**

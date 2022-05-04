@@ -3,7 +3,7 @@ package com.example.week4challenge
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.week4challenge.photo.PhotoFragment
-import com.example.week4challenge.util.replaceFragment
+import com.example.utils.util.replaceFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

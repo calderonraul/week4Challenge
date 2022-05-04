@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.domain.repository.PhotosRepository
 import com.example.data.api.PhotosApi
+import com.example.domain.useCases.GetAllPhotosUseCase
 import com.example.week4challenge.BuildConfig.DEBUG
 import com.example.week4challenge.R
 import com.example.week4challenge.photo.PhotoViewModel
@@ -83,6 +84,14 @@ val repositoryModule= module {
         return com.example.data.PhotosRepositoryImpl(api, context, dao)
     }
     single { providePhotosRepository(get(),androidContext(),get()) }
+}
+
+
+val useCaseModule= module {
+    fun provideUseCase(photosRepository: PhotosRepository): GetAllPhotosUseCase {
+        return GetAllPhotosUseCase(photosRepository)
+    }
+    single { provideUseCase(get()) }
 }
 
 val viewModelModule= module {

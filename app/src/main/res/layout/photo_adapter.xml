@@ -9,7 +9,7 @@
 
         <variable
             name="photo"
-            type="com.example.data.model.Photo" />
+            type="com.example.domain.entity.PhotoDomain" />
 
         <variable
             name="photoClickListenerInterface"
@@ -26,7 +26,6 @@
         app:cardMaxElevation="@dimen/card_maximus_elevation"
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true"
-        android:onClick="@{() -> photoClickListenerInterface.onItemClick(photo)}"
 
         card_view:layout_constraintEnd_toEndOf="parent"
         card_view:layout_constraintStart_toStartOf="parent"
