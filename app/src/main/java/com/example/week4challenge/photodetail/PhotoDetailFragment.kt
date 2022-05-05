@@ -15,7 +15,7 @@ import com.example.domain.entity.PhotoDomain
 
 class PhotoDetailFragment : Fragment() {
 
-    /*companion object {
+    companion object {
         @JvmStatic
         fun newInstance(data: PhotoDomain) = PhotoDetailFragment().apply {
             arguments = Bundle().apply {
@@ -23,7 +23,9 @@ class PhotoDetailFragment : Fragment() {
                 // TODO: please dont user hardcode string use a connstant in this cases
             }
         }
-    }*/
+
+
+    }
 
     private var photo: Photo? = null
     private lateinit var mViewDataBinding: PhotoDetailFragmentBinding
@@ -33,7 +35,6 @@ class PhotoDetailFragment : Fragment() {
         super.onAttach(context)
         // TODO: please dont user hardcode string use a connstant in this cases
        // photo = arguments?.getParcelable("photo_data")
-
         photo?.let { Log.d("detalle", it.title) }
     }
 
@@ -41,7 +42,7 @@ class PhotoDetailFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View{
         mViewDataBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.photo_detail_fragment, container, false
@@ -53,10 +54,10 @@ class PhotoDetailFragment : Fragment() {
 
     // TODO: this functions has been deprecated you can do this in a observable or in view created. function
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        //enableBackButton()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         mViewDataBinding.photo = photo
     }
+
 
 }

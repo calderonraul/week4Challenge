@@ -11,14 +11,9 @@ import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "photos_table")
 data class Photo(
-    @ColumnInfo(name = "album_id")
-    override val albumId: Int,
-    @PrimaryKey(autoGenerate = true)
-    override val id: Int,
-    @ColumnInfo(name = "title")
-    override val title: String,
-    @ColumnInfo(name = "url")
-    override val url: String,
-    @ColumnInfo(name = "thumbnailUrl")
-    override val thumbnailUrl: String?
-) : PhotoDomain
+    @ColumnInfo(name = "album_id") val albumId: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    @ColumnInfo(name = "title") val title: String,
+    @ColumnInfo(name = "url") val url: String,
+    @ColumnInfo(name = "thumbnailUrl") val thumbnailUrl: String?
+)

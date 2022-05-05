@@ -1,7 +1,6 @@
 package com.example.week4challenge.photo
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.week4challenge.R
 import com.example.week4challenge.databinding.FragmentPhotoBinding
 import com.example.domain.entity.PhotoDomain
+import com.example.utils.util.replaceFragment
+import com.example.week4challenge.MainActivity
+import com.example.week4challenge.photodetail.PhotoDetailFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -24,7 +26,7 @@ class PhotoFragment : Fragment(), PhotoClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View{
         mViewDataBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_photo, container, false)
         val mRootView = mViewDataBinding.root
@@ -33,8 +35,9 @@ class PhotoFragment : Fragment(), PhotoClickListener {
 
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setView()
         mViewDataBinding.viewModel = photoViewModel
         loadContent()
@@ -45,13 +48,15 @@ class PhotoFragment : Fragment(), PhotoClickListener {
         }
     }
 
+
     private fun loadContent() {
         photoViewModel.getAllPhotos()
         photoViewModel.photoList.observe(viewLifecycleOwner, Observer {
             // I know its a log, but please dont use bang bang operator. (!!)
-            Log.wtf("@@photos", it!!.size.toString())
-            if (it.isNotEmpty()) {
-                photoAdapter.setPhotos(it)
+            if (it != null) {
+                if (it.isNotEmpty()) {
+                    photoAdapter.setPhotos(it)
+                }
             }
 
         })
@@ -69,12 +74,12 @@ class PhotoFragment : Fragment(), PhotoClickListener {
     }
 
     override fun onItemClick(photo: PhotoDomain) {
-        /*
+
         (activity as MainActivity).replaceFragment(
             PhotoDetailFragment.newInstance(photo),
             R.id.fragment_container,
             "photoDetails"
-        )*/
+        )
         // please make this string a constant string
     }
 
