@@ -10,7 +10,7 @@ class PhotoMapper :EntityMapper<Photo,PhotoDomain>{
             id = entity.id,
             title = entity.title,
             url = entity.url,
-            thumbnailUrl = entity.thumbnailUrl
+            thumbnailUrl = entity.thumbnailUrl.toString()
         )
     }
 
@@ -24,4 +24,14 @@ class PhotoMapper :EntityMapper<Photo,PhotoDomain>{
             thumbnailUrl = domainModel.thumbnailUrl
         )
     }
+
+    fun fromEntityList(initial: List<Photo>): List<PhotoDomain>{
+        return initial.map { mapFromEntity(it) }
+    }
+
+    fun toEntityList(initial: List<PhotoDomain>): List<Photo>{
+        return initial.map { mapToEntity(it) }
+    }
+
+
 }

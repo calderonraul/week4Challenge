@@ -27,7 +27,7 @@ class PhotoDetailFragment : Fragment() {
 
     }
 
-    private var photo: Photo? = null
+    private var photo: PhotoDomain? = null
     private lateinit var mViewDataBinding: PhotoDetailFragmentBinding
 
 
@@ -52,7 +52,6 @@ class PhotoDetailFragment : Fragment() {
         return mRootView
     }
 
-    // TODO: this functions has been deprecated you can do this in a observable or in view created. function
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

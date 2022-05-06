@@ -10,13 +10,11 @@
             name="photo"
             type="com.example.domain.entity.PhotoDomain" />
 
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <TextView
             android:id="@+id/photoDetailTitle"
@@ -37,7 +35,7 @@
             android:layout_width="337dp"
             android:layout_height="432dp"
             android:layout_marginTop="110dp"
-            app:imgURL="@{photo.url}"
+            app:imgURl="@{photo.url}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

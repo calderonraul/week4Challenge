@@ -2,6 +2,7 @@ package com.example.data
 
 import android.content.Context
 import com.example.data.api.PhotosApi
+import com.example.data.model.PhotoMapper
 import com.example.domain.entity.PhotoDomain
 import com.example.utils.util.AppResult
 import com.example.utils.util.NetworkManager.isOnline
@@ -15,7 +16,8 @@ import kotlinx.coroutines.withContext
 class PhotosRepositoryImpl(
     private val api: PhotosApi,
     private val context: Context,
-    private val dao: com.example.data.database.PhotosDAO
+    private val dao: com.example.data.database.PhotosDAO,
+    private val mapper: PhotoMapper
 ) : PhotosRepository {
     override suspend fun getAllPhotos(): AppResult<List<PhotoDomain>> {
         if (isOnline(context)) {
@@ -23,7 +25,7 @@ class PhotosRepositoryImpl(
                 val response = api.getAllPhotos(100)
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        withContext(Dispatchers.IO) { dao.add(it) }
+                        withContext(Dispatchers.IO) { dao.add(mapper.toEntityList(it)) }
 
                     }
                     handleSuccess(response)
@@ -46,7 +48,7 @@ class PhotosRepositoryImpl(
 
     private suspend fun getPhotosFromCache(): List<PhotoDomain> {
         return withContext(Dispatchers.IO) {
-            dao.findAll()
+            mapper.fromEntityList(dao.findAll())
         }
     }
 

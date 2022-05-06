@@ -14,6 +14,6 @@ data class PhotoDomain (
 
     val url: String,
 
-    val thumbnailUrl: String?) : Parcelable
+    val thumbnailUrl: String) : Parcelable
 
 

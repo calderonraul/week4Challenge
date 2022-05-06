@@ -1,5 +1,6 @@
 package com.example.week4challenge
 
+import android.util.Log
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -9,15 +10,17 @@ import com.bumptech.glide.load.model.LazyHeaders
 import com.bumptech.glide.request.RequestOptions
 
 @BindingAdapter("imgURL")
-fun loadImage(view: ImageView, IMGurl: String) {
+fun loadImage(view: ImageView, imgURl: String) {
 
 
-    IMGurl.let {
+    Log.wtf("RFCJ",imgURl)
+
+    imgURl.let {
         val url = GlideUrl(
             it, LazyHeaders.Builder()
                 .addHeader("User-Agent", "your-user-agent")
                 .build()
-        );
+        )
         Glide.with(view)
             .load(url)
             .diskCacheStrategy(DiskCacheStrategy.ALL)

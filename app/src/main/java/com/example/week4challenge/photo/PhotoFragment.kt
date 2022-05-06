@@ -1,6 +1,7 @@
 package com.example.week4challenge.photo
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -80,6 +81,7 @@ class PhotoFragment : Fragment(), PhotoClickListener {
             R.id.fragment_container,
             "photoDetails"
         )
+        Log.wtf("pokemon",photo.toString())
         // please make this string a constant string
     }
 

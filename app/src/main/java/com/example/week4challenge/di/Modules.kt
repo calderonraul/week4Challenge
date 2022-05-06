@@ -5,6 +5,8 @@ import android.content.Context
 import androidx.room.Room
 import com.example.domain.repository.PhotosRepository
 import com.example.data.api.PhotosApi
+import com.example.data.model.PhotoMapper
+import com.example.domain.entity.PhotoDomain
 import com.example.domain.useCases.GetAllPhotosUseCase
 import com.example.week4challenge.BuildConfig.DEBUG
 import com.example.week4challenge.R
@@ -79,11 +81,19 @@ val networkModule= module {
     }
 }
 
+
 val repositoryModule= module {
-    fun providePhotosRepository(api: PhotosApi, context:Context, dao: com.example.data.database.PhotosDAO): com.example.domain.repository.PhotosRepository {
-        return com.example.data.PhotosRepositoryImpl(api, context, dao)
+    fun providePhotosRepository(api: PhotosApi, context:Context, dao: com.example.data.database.PhotosDAO,mapper: PhotoMapper): PhotosRepository {
+        return com.example.data.PhotosRepositoryImpl(api, context, dao,mapper)
     }
-    single { providePhotosRepository(get(),androidContext(),get()) }
+    single { providePhotosRepository(get(),androidContext(),get(),get()) }
+}
+
+val mapperModule= module {
+    fun provideMapper():PhotoMapper{
+        return PhotoMapper()
+    }
+    single { provideMapper() }
 }
 
 

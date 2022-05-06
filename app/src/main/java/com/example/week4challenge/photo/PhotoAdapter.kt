@@ -33,8 +33,10 @@ class PhotoAdapter(val context: Context?, val clickListener: PhotoClickListener)
         return photoList.size
     }
 
-    fun setPhotos(photos: List<PhotoDomain>) {
-        this.photoList = photos
+    fun setPhotos(photos: List<PhotoDomain>?) {
+        if (photos != null) {
+            this.photoList = photos
+        }
         notifyDataSetChanged()
     }
 
