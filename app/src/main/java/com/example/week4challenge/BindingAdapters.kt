@@ -13,8 +13,7 @@ import com.bumptech.glide.request.RequestOptions
 fun loadImage(view: ImageView, imgURl: String) {
 
 
-    Log.wtf("RFCJ",imgURl)
-
+   // Log.wtf("RFCJ",imgURl)
     imgURl.let {
         val url = GlideUrl(
             it, LazyHeaders.Builder()

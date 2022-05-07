@@ -1,31 +1,28 @@
-package com.example.week4challenge.photo
+package com.example.week4challenge.photodetail
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.week4challenge.R
-import com.example.week4challenge.databinding.PhotoAdapterBinding
-import com.example.data.model.Photo
 import com.example.domain.entity.PhotoDomain
+import com.example.week4challenge.R
+import com.example.week4challenge.databinding.PhotoDetailAdapterBinding
 
-class PhotoAdapter(val clickListener: PhotoClickListener) :
-    RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder>() {
 
+class PhotoDetailAdapter: RecyclerView.Adapter<PhotoDetailAdapter.PhotoViewHolder>() {
     var photoList: List<PhotoDomain> = ArrayList()
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): PhotoAdapter.PhotoViewHolder {
-        val viewBinding: PhotoAdapterBinding = DataBindingUtil.inflate(
+    ): PhotoDetailAdapter.PhotoViewHolder {
+        val viewBinding:PhotoDetailAdapterBinding  = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.photo_adapter, parent, false
+            R.layout.photo_detail_adapter, parent, false
         )
         return PhotoViewHolder(viewBinding)
     }
 
-    override fun onBindViewHolder(holder: PhotoAdapter.PhotoViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PhotoDetailAdapter.PhotoViewHolder, position: Int) {
         holder.onBind(position)
     }
 
@@ -40,13 +37,14 @@ class PhotoAdapter(val clickListener: PhotoClickListener) :
         notifyDataSetChanged()
     }
 
-    inner class PhotoViewHolder(private val viewBinding: PhotoAdapterBinding) :
+    inner class PhotoViewHolder(private var viewBinding: PhotoDetailAdapterBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
         fun onBind(position: Int) {
             val row = photoList[position]
-            viewBinding.photo = row
-            viewBinding.imgPortada
-            viewBinding.photoClickListenerInterface = clickListener
+           viewBinding.photo=row
+            viewBinding.photoIv
         }
     }
+
+
 }

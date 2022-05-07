@@ -11,6 +11,7 @@ import com.example.domain.useCases.GetAllPhotosUseCase
 import com.example.week4challenge.BuildConfig.DEBUG
 import com.example.week4challenge.R
 import com.example.week4challenge.photo.PhotoViewModel
+import com.example.week4challenge.photodetail.PhotoDetailViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
@@ -102,6 +103,12 @@ val useCaseModule= module {
         return GetAllPhotosUseCase(photosRepository)
     }
     single { provideUseCase(get()) }
+}
+
+val detailViewModel=module{
+    viewModel {
+        PhotoDetailViewModel(useCase = get())
+    }
 }
 
 val viewModelModule= module {

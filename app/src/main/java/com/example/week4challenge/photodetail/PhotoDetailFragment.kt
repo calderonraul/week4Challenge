@@ -8,10 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.week4challenge.R
 import com.example.week4challenge.databinding.PhotoDetailFragmentBinding
-import com.example.data.model.Photo
 import com.example.domain.entity.PhotoDomain
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class PhotoDetailFragment : Fragment() {
 
@@ -19,30 +21,22 @@ class PhotoDetailFragment : Fragment() {
         @JvmStatic
         fun newInstance(data: PhotoDomain) = PhotoDetailFragment().apply {
             arguments = Bundle().apply {
-                putParcelable("photo_data", data)
-                // TODO: please dont user hardcode string use a connstant in this cases
             }
         }
 
 
     }
 
-    private var photo: PhotoDomain? = null
+
+    private val photoDetailViewModel by viewModel<PhotoDetailViewModel>()
+    private lateinit var photoDetailAdapter: PhotoDetailAdapter
     private lateinit var mViewDataBinding: PhotoDetailFragmentBinding
-
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        // TODO: please dont user hardcode string use a connstant in this cases
-       // photo = arguments?.getParcelable("photo_data")
-        photo?.let { Log.d("detalle", it.title) }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View{
+    ): View {
         mViewDataBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.photo_detail_fragment, container, false
@@ -55,8 +49,31 @@ class PhotoDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mViewDataBinding.photo = photo
+        setView()
+        mViewDataBinding.viewModel=photoDetailViewModel
+        loadContent()
+        //mViewDataBinding. = photo
     }
 
+    private fun loadContent() {
+        photoDetailViewModel.getAllPhotos()
+        photoDetailViewModel.photoList.observe(viewLifecycleOwner, androidx.lifecycle.Observer{
+            if (it != null) {
+                if (it.isNotEmpty()) {
+                    photoDetailAdapter.setPhotos(it)
+                }
+            }
+        })
+    }
+
+    private fun setView(){
+
+        photoDetailAdapter=PhotoDetailAdapter()
+
+        mViewDataBinding.photoDetailRv.layoutManager=
+            LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
+        mViewDataBinding.photoDetailRv.adapter=photoDetailAdapter
+
+    }
 
 }

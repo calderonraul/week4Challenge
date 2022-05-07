@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.week4challenge.R
 import com.example.week4challenge.databinding.FragmentPhotoBinding
 import com.example.domain.entity.PhotoDomain
+import com.example.utils.util.Constants.FRAGMENT_DESTINY
 import com.example.utils.util.replaceFragment
 import com.example.week4challenge.MainActivity
 import com.example.week4challenge.photodetail.PhotoDetailFragment
@@ -19,6 +20,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class PhotoFragment : Fragment(), PhotoClickListener {
+
 
     private val photoViewModel by viewModel<PhotoViewModel>()
     private lateinit var photoAdapter: PhotoAdapter
@@ -65,7 +67,7 @@ class PhotoFragment : Fragment(), PhotoClickListener {
 
     private fun setView() {
 
-        photoAdapter = PhotoAdapter(context, this)
+        photoAdapter = PhotoAdapter(this)
         mViewDataBinding.rvPhotos.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         mViewDataBinding.rvPhotos.adapter = photoAdapter
@@ -79,10 +81,8 @@ class PhotoFragment : Fragment(), PhotoClickListener {
         (activity as MainActivity).replaceFragment(
             PhotoDetailFragment.newInstance(photo),
             R.id.fragment_container,
-            "photoDetails"
+            FRAGMENT_DESTINY
         )
-        Log.wtf("pokemon",photo.toString())
-        // please make this string a constant string
     }
 
 
