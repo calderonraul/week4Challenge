@@ -11,17 +11,16 @@
             type="com.example.domain.entity.PhotoDomain" />
 
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_height="150dp"
-        tools:layout_width="150dp">
-
+        app:layout_constraintBottom_toTopOf="@+id/photo_iv"
+        app:layout_constraintTop_toTopOf="@+id/photo_iv">
         <ImageView
             android:id="@+id/photo_iv"
             android:layout_width="0dp"
             android:layout_height="0dp"
-
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
@@ -31,7 +30,6 @@
             app:imgURL="@{photo.url}"
             tools:src="@tools:sample/backgrounds/scenic"
             />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.*
 import com.example.week4challenge.R
 import com.example.week4challenge.databinding.PhotoDetailFragmentBinding
 import com.example.domain.entity.PhotoDomain
@@ -50,14 +50,14 @@ class PhotoDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setView()
-        mViewDataBinding.viewModel=photoDetailViewModel
+        mViewDataBinding.viewModel = photoDetailViewModel
         loadContent()
         //mViewDataBinding. = photo
     }
 
     private fun loadContent() {
         photoDetailViewModel.getAllPhotos()
-        photoDetailViewModel.photoList.observe(viewLifecycleOwner, androidx.lifecycle.Observer{
+        photoDetailViewModel.photoList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             if (it != null) {
                 if (it.isNotEmpty()) {
                     photoDetailAdapter.setPhotos(it)
@@ -66,14 +66,16 @@ class PhotoDetailFragment : Fragment() {
         })
     }
 
-    private fun setView(){
+    private fun setView() {
 
-        photoDetailAdapter=PhotoDetailAdapter()
-
-        mViewDataBinding.photoDetailRv.layoutManager=
-            LinearLayoutManager(activity,LinearLayoutManager.VERTICAL,false)
-        mViewDataBinding.photoDetailRv.adapter=photoDetailAdapter
-
+        photoDetailAdapter = PhotoDetailAdapter()
+        mViewDataBinding.photoDetailRv.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        mViewDataBinding.photoDetailRv.adapter = photoDetailAdapter
+        PagerSnapHelper().attachToRecyclerView(mViewDataBinding.photoDetailRv)
+        
     }
+
+
 
 }
