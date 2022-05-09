@@ -9,7 +9,7 @@
 
         <variable
             name="photo"
-            type="com.example.week4challenge.model.Photo" />
+            type="com.example.domain.entity.PhotoDomain" />
 
         <variable
             name="photoClickListenerInterface"
@@ -27,7 +27,6 @@
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true"
         android:onClick="@{() -> photoClickListenerInterface.onItemClick(photo)}"
-
         card_view:layout_constraintEnd_toEndOf="parent"
         card_view:layout_constraintStart_toStartOf="parent"
         card_view:layout_constraintTop_toTopOf="parent">

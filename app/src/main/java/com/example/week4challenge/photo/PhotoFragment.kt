@@ -9,16 +9,18 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.week4challenge.MainActivity
 import com.example.week4challenge.R
 import com.example.week4challenge.databinding.FragmentPhotoBinding
-import com.example.week4challenge.model.Photo
+import com.example.domain.entity.PhotoDomain
+import com.example.utils.util.Constants.FRAGMENT_DESTINY
+import com.example.utils.util.replaceFragment
+import com.example.week4challenge.MainActivity
 import com.example.week4challenge.photodetail.PhotoDetailFragment
-import com.example.week4challenge.util.replaceFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class PhotoFragment : Fragment(), PhotoClickListener {
+
 
     private val photoViewModel by viewModel<PhotoViewModel>()
     private lateinit var photoAdapter: PhotoAdapter
@@ -27,7 +29,7 @@ class PhotoFragment : Fragment(), PhotoClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View{
         mViewDataBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_photo, container, false)
         val mRootView = mViewDataBinding.root
@@ -36,8 +38,9 @@ class PhotoFragment : Fragment(), PhotoClickListener {
 
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setView()
         mViewDataBinding.viewModel = photoViewModel
         loadContent()
@@ -48,13 +51,15 @@ class PhotoFragment : Fragment(), PhotoClickListener {
         }
     }
 
+
     private fun loadContent() {
         photoViewModel.getAllPhotos()
         photoViewModel.photoList.observe(viewLifecycleOwner, Observer {
             // I know its a log, but please dont use bang bang operator. (!!)
-            Log.wtf("@@photos", it!!.size.toString())
-            if (it.isNotEmpty()) {
-                photoAdapter.setPhotos(it)
+            if (it != null) {
+                if (it.isNotEmpty()) {
+                    photoAdapter.setPhotos(it)
+                }
             }
 
         })
@@ -62,7 +67,7 @@ class PhotoFragment : Fragment(), PhotoClickListener {
 
     private fun setView() {
 
-        photoAdapter = PhotoAdapter(context, this)
+        photoAdapter = PhotoAdapter(this)
         mViewDataBinding.rvPhotos.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         mViewDataBinding.rvPhotos.adapter = photoAdapter
@@ -71,13 +76,13 @@ class PhotoFragment : Fragment(), PhotoClickListener {
 
     }
 
-    override fun onItemClick(photo: Photo) {
+    override fun onItemClick(photo: PhotoDomain) {
+
         (activity as MainActivity).replaceFragment(
             PhotoDetailFragment.newInstance(photo),
             R.id.fragment_container,
-            "photoDetails"
+            FRAGMENT_DESTINY
         )
-        // please make this string a constant string
     }
 
 

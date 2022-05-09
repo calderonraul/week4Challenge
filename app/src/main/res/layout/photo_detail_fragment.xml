@@ -1,48 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
     <data>
 
         <import type="android.view.View" />
 
         <variable
-            name="photo"
-            type="com.example.week4challenge.model.Photo" />
-
-
+            name="viewModel"
+            type="com.example.week4challenge.photodetail.PhotoDetailViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <TextView
-            android:id="@+id/photoDetailTitle"
-            style="@style/header_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/photoDetailRv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginTop="16dp"
-            android:text="@{photo.title}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Header" />
-
-        <ImageView
-            android:id="@+id/PhotoImageView"
-            android:layout_width="337dp"
-            android:layout_height="432dp"
-            android:layout_marginTop="110dp"
-            app:imgURL="@{photo.url}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
-
+            android:layout_marginBottom="16dp"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/photo_detail_fragment"
+            tools:orientation="horizontal" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

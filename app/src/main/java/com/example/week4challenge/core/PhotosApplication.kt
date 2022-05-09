@@ -17,7 +17,9 @@ class PhotosApplication : Application() {
                 viewModelModule,
                 repositoryModule,
                 networkModule,
-                databaseModule
+                databaseModule, useCaseModule,
+                mapperModule,
+                detailViewModel
             )
         }
     }
