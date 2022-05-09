@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.SnapHelper
+import androidx.core.view.doOnPreDraw
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.*
 import com.example.week4challenge.R
@@ -26,7 +28,9 @@ class PhotoDetailFragment : Fragment() {
 
 
     }
+    private lateinit var snapHelper: SnapHelper
 
+    private lateinit var layoutManager: LinearLayoutManager
 
     private val photoDetailViewModel by viewModel<PhotoDetailViewModel>()
     private lateinit var photoDetailAdapter: PhotoDetailAdapter
@@ -41,8 +45,11 @@ class PhotoDetailFragment : Fragment() {
             inflater,
             R.layout.photo_detail_fragment, container, false
         )
+
         val mRootView = mViewDataBinding.root
         mViewDataBinding.lifecycleOwner = this
+        layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+
         return mRootView
     }
 
@@ -73,9 +80,25 @@ class PhotoDetailFragment : Fragment() {
             LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         mViewDataBinding.photoDetailRv.adapter = photoDetailAdapter
         PagerSnapHelper().attachToRecyclerView(mViewDataBinding.photoDetailRv)
-        
+        //initRecyclerViewPosition(5)
+
+
+
+
+
     }
 
+private fun initRecyclerViewPosition(position:Int){
+    layoutManager.scrollToPosition(position)
+    mViewDataBinding.photoDetailRv.doOnPreDraw {
+        val targetView = layoutManager.findViewByPosition(position) ?: return@doOnPreDraw
+        val distanceToFinalSnap =
+            snapHelper.calculateDistanceToFinalSnap(layoutManager, targetView)
+                ?: return@doOnPreDraw
 
+        layoutManager.scrollToPositionWithOffset(position, -distanceToFinalSnap[0])
+    }
+
+}
 
 }
