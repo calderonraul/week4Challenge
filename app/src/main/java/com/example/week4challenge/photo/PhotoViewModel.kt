@@ -12,14 +12,16 @@ import com.example.domain.useCases.GetAllPhotosUseCase
 import com.example.utils.util.AppResult
 
 import com.example.utils.util.SingleLiveEvent
+import io.reactivex.Observable
 import kotlinx.coroutines.launch
+import rx.subjects.BehaviorSubject
 
 
 class PhotoViewModel(private val repository: GetAllPhotosUseCase) : ViewModel() {
-    // this onservable could be private
-    val showLoading = ObservableBoolean()
-    val photoList = MutableLiveData<List<PhotoDomain>?>()
+    private val showLoading = ObservableBoolean()
+    //var photoList = MutableLiveData<List<PhotoDomain>?>()
     val showError = SingleLiveEvent<String?>()
+    var photoRX: BehaviorSubject<List<PhotoDomain>>? =BehaviorSubject.create()
 
     fun getAllPhotos() {
         showLoading.set(true)
@@ -28,7 +30,8 @@ class PhotoViewModel(private val repository: GetAllPhotosUseCase) : ViewModel() 
             showLoading.set(false)
             when (result) {
                 is AppResult.Success -> {
-                    photoList.value = result.successData
+                    //photoList.value = result.successData
+                    photoRX?.onNext(result.successData)
                     showError.value = null
                 }
                 is AppResult.Error -> showError.value = result.exception.message
