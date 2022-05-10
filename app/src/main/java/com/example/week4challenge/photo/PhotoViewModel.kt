@@ -12,12 +12,14 @@ import com.example.domain.useCases.GetAllPhotosUseCase
 import com.example.utils.util.AppResult
 
 import com.example.utils.util.SingleLiveEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.Observable
 import kotlinx.coroutines.launch
 import rx.subjects.BehaviorSubject
+import javax.inject.Inject
 
-
-class PhotoViewModel(private val repository: GetAllPhotosUseCase) : ViewModel() {
+@HiltViewModel
+class PhotoViewModel @Inject constructor (private val repository: GetAllPhotosUseCase) : ViewModel() {
     private val showLoading = ObservableBoolean()
     //var photoList = MutableLiveData<List<PhotoDomain>?>()
     val showError = SingleLiveEvent<String?>()

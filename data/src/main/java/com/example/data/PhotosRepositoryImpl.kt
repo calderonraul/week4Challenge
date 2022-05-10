@@ -12,8 +12,9 @@ import com.example.domain.repository.PhotosRepository
 import com.example.utils.util.noNetworkConnectivityError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class PhotosRepositoryImpl(
+class PhotosRepositoryImpl (
     private val api: PhotosApi,
     private val context: Context,
     private val dao: com.example.data.database.PhotosDAO,

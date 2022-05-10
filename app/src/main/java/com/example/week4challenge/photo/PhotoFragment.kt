@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.domain.entity.PhotoDomain
 import com.example.utils.util.Constants.FRAGMENT_DESTINY
@@ -14,13 +15,14 @@ import com.example.week4challenge.MainActivity
 import com.example.week4challenge.R
 import com.example.week4challenge.databinding.FragmentPhotoBinding
 import com.example.week4challenge.photodetail.PhotoDetailFragment
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import dagger.hilt.android.AndroidEntryPoint
+//import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
+@AndroidEntryPoint
 class PhotoFragment : Fragment(), PhotoClickListener {
 
 
-    private val photoViewModel by viewModel<PhotoViewModel>()
+    private val photoViewModel by viewModels<PhotoViewModel>()
     private lateinit var photoAdapter: PhotoAdapter
     private lateinit var mViewDataBinding: FragmentPhotoBinding
 

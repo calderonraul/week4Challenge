@@ -2,8 +2,10 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-parcelize'
+    id 'dagger.hilt.android.plugin'
 
 }
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdk 32
@@ -33,6 +35,8 @@ android {
 }
 
 dependencies {
+    implementation("com.google.dagger:hilt-android:2.38.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
