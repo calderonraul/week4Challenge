@@ -10,13 +10,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.SnapHelper
 import androidx.core.view.doOnPreDraw
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.*
 import com.example.week4challenge.R
 import com.example.week4challenge.databinding.PhotoDetailFragmentBinding
 import com.example.domain.entity.PhotoDomain
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.example.week4challenge.photo.PhotoViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class PhotoDetailFragment : Fragment() {
 
     companion object {
@@ -32,7 +35,7 @@ class PhotoDetailFragment : Fragment() {
 
     private lateinit var layoutManager: LinearLayoutManager
 
-    private val photoDetailViewModel by viewModel<PhotoDetailViewModel>()
+    private val photoDetailViewModel by viewModels<PhotoDetailViewModel>()
     private lateinit var photoDetailAdapter: PhotoDetailAdapter
     private lateinit var mViewDataBinding: PhotoDetailFragmentBinding
 
@@ -64,13 +67,17 @@ class PhotoDetailFragment : Fragment() {
 
     private fun loadContent() {
         photoDetailViewModel.getAllPhotos()
+        photoDetailViewModel.photoRX?.subscribe {
+            photoDetailAdapter.setPhotos(it)
+        }
+        /*
         photoDetailViewModel.photoList.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             if (it != null) {
                 if (it.isNotEmpty()) {
                     photoDetailAdapter.setPhotos(it)
                 }
             }
-        })
+        })*/
     }
 
     private fun setView() {

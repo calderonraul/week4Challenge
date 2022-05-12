@@ -2,6 +2,7 @@ package com.example.week4challenge.photo
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +10,7 @@ import com.example.week4challenge.R
 import com.example.week4challenge.databinding.PhotoAdapterBinding
 import com.example.data.model.Photo
 import com.example.domain.entity.PhotoDomain
+import com.example.week4challenge.databinding.PhotoAdapterViewtype2Binding
 
 class PhotoAdapter(val clickListener: PhotoClickListener) :
     RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder>() {

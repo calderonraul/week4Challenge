@@ -8,12 +8,18 @@ import com.example.domain.entity.PhotoDomain
 import com.example.domain.useCases.GetAllPhotosUseCase
 import com.example.utils.util.AppResult
 import com.example.utils.util.SingleLiveEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import rx.subjects.BehaviorSubject
+import javax.inject.Inject
 
-class PhotoDetailViewModel(private val useCase: GetAllPhotosUseCase) :ViewModel(){
+
+@HiltViewModel
+class PhotoDetailViewModel @Inject constructor( val useCase: GetAllPhotosUseCase) :ViewModel(){
 
     val showLoading = ObservableBoolean()
-    val photoList = MutableLiveData<List<PhotoDomain>?>()
+   // val photoList = MutableLiveData<List<PhotoDomain>?>()
+    var photoRX: BehaviorSubject<List<PhotoDomain>>? =BehaviorSubject.create()
     val showError = SingleLiveEvent<String?>()
 
     fun getAllPhotos(){
@@ -23,7 +29,8 @@ class PhotoDetailViewModel(private val useCase: GetAllPhotosUseCase) :ViewModel(
             showLoading.set(false)
             when (result) {
                 is AppResult.Success -> {
-                    photoList.value = result.successData
+                    //photoList.value = result.
+                    photoRX?.onNext(result.successData)
                     showError.value = null
                 }
                 is AppResult.Error -> showError.value = result.exception.message
