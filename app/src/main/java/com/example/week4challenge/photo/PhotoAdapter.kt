@@ -11,7 +11,7 @@ import com.example.week4challenge.databinding.PhotoAdapterViewtype2Binding
 
 class PhotoAdapter(val clickListener: PhotoClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+    private val EXCEPTIONMESSAGE = "couldn't create view holder"
     private lateinit var bindingType1: PhotoAdapterBinding
     private lateinit var bindingType2: PhotoAdapterViewtype2Binding
     var photoList: List<PhotoDomain> = ArrayList()
@@ -42,7 +42,7 @@ class PhotoAdapter(val clickListener: PhotoClickListener) :
                 PhotoViewHolder2(bindingType2)
             }
             else -> {
-                throw Exception("couldn't create view holder")
+                throw Exception(EXCEPTIONMESSAGE)
             }
         }
 

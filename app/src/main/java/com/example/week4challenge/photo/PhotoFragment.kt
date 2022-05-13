@@ -38,7 +38,6 @@ class PhotoFragment : Fragment(), PhotoClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         photoViewModel.getAllPhotos()
-        mViewDataBinding.rvPhotos.setHasFixedSize(true)
         mViewDataBinding.rvPhotos.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         load()
@@ -54,7 +53,6 @@ class PhotoFragment : Fragment(), PhotoClickListener {
             photoAdapter = PhotoAdapter(this)
             photoAdapter.setPhotos(it)
             mViewDataBinding.rvPhotos.adapter = photoAdapter
-            mViewDataBinding.rvPhotos.scrollToPosition(15)
         }
         mViewDataBinding.viewModel = photoViewModel
     }

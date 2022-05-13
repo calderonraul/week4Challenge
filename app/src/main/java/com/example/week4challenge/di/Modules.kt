@@ -24,7 +24,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object apiModule {
+object ApiModule {
     @Provides
     @Singleton
     fun provideCountriesApi(retrofit: Retrofit): PhotosApi {
@@ -35,14 +35,14 @@ object apiModule {
 
 @Module
 @InstallIn(SingletonComponent::class)
-object databaseModule {
-
+object DatabaseModule {
+    private const val NAME="photos"
     @Provides
     @Singleton
     fun provideDatabase(application: Application): com.example.data.database.PhotosDatabase {
         return Room.databaseBuilder(
             application,
-            com.example.data.database.PhotosDatabase::class.java, "photos"
+            com.example.data.database.PhotosDatabase::class.java, NAME
         )
             .fallbackToDestructiveMigration()
             .build()
@@ -58,9 +58,9 @@ object databaseModule {
 
 @Module
 @InstallIn(SingletonComponent::class)
-object networkModule {
-    val connectTimeout: Long = 40// 20s
-    val readTimeout: Long = 40 // 20s
+object NetworkModule {
+    private const val connectTimeout: Long = 40// 20s
+    private const val readTimeout: Long = 40 // 20s
     private const val BASE_URL = "https://jsonplaceholder.typicode.com"
 
     @Provides
@@ -96,7 +96,7 @@ object networkModule {
 
 @Module
 @InstallIn(SingletonComponent::class)
-object repositoryModule {
+object RepositoryModule {
 
     @Provides
     fun providePhotosRepository(
@@ -113,7 +113,7 @@ object repositoryModule {
 
 @Module
 @InstallIn(SingletonComponent::class)
-object mapperModule {
+object MapperModule {
 
     @Provides
     @Singleton
@@ -125,7 +125,7 @@ object mapperModule {
 
 @Module
 @InstallIn(SingletonComponent::class)
-object useCaseModule {
+object UseCaseModule {
     @Provides
     @Singleton
     fun provideUseCase(photosRepository: PhotosRepository): GetAllPhotosUseCase {
@@ -133,15 +133,4 @@ object useCaseModule {
     }
 
 }
-/*
-val detailViewModel = module {
-    viewModel {
-        PhotoDetailViewModel(useCase = get())
-    }
-}
-
-val viewModelModule = module {
-    viewModel {
-        PhotoViewModel(repository = get())
-    }}*/
 

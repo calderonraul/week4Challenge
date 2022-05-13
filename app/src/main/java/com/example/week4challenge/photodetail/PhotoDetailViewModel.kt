@@ -15,21 +15,20 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class PhotoDetailViewModel @Inject constructor( val useCase: GetAllPhotosUseCase) :ViewModel(){
+class PhotoDetailViewModel @Inject constructor(private val useCase: GetAllPhotosUseCase) :
+    ViewModel() {
 
-    val showLoading = ObservableBoolean()
-   // val photoList = MutableLiveData<List<PhotoDomain>?>()
-    var photoRX: BehaviorSubject<List<PhotoDomain>>? =BehaviorSubject.create()
-    val showError = SingleLiveEvent<String?>()
+    private val showLoading = ObservableBoolean()
+    var photoRX: BehaviorSubject<List<PhotoDomain>>? = BehaviorSubject.create()
+    private val showError = SingleLiveEvent<String?>()
 
-    fun getAllPhotos(){
+    fun getAllPhotos() {
         showLoading.set(true)
         viewModelScope.launch {
             val result = useCase.invoke()
             showLoading.set(false)
             when (result) {
                 is AppResult.Success -> {
-                    //photoList.value = result.
                     photoRX?.onNext(result.successData)
                     showError.value = null
                 }

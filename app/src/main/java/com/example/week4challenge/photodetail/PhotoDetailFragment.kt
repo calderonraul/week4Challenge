@@ -58,7 +58,7 @@ class PhotoDetailFragment : Fragment() {
             photoDetailAdapter.setPhotos(it)
             mViewDataBinding.photoDetailRv.adapter = photoDetailAdapter
             PagerSnapHelper().attachToRecyclerView(mViewDataBinding.photoDetailRv)
-            mViewDataBinding.photoDetailRv.smoothScrollToPosition(selectedPhoto)
+            mViewDataBinding.photoDetailRv.smoothScrollToPosition(selectedPhoto-1)
         }
 
         mViewDataBinding.viewModel = photoDetailViewModel

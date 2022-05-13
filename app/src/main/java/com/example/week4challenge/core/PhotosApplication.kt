@@ -9,20 +9,4 @@ import org.koin.core.context.startKoin
 
 @HiltAndroidApp
 class PhotosApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        /*startKoin {
-            androidLogger()
-            androidContext(this@PhotosApplication)
-            modules(
-                apiModule,
-                viewModelModule,
-                repositoryModule,
-                networkModule,
-                databaseModule, useCaseModule,
-                mapperModule,
-                detailViewModel
-            )
-        }*/
-    }
 }

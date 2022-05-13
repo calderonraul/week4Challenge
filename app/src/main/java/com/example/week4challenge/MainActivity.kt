@@ -16,8 +16,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addCountriesFragment() {
-        /* Display First Fragment initially */
-        replaceFragment(PhotoFragment(),
+        replaceFragment(
+            PhotoFragment(),
             R.id.fragment_container
         )
     }

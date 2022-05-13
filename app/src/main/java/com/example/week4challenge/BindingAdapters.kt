@@ -12,8 +12,6 @@ import com.bumptech.glide.request.RequestOptions
 @BindingAdapter("imgURL")
 fun loadImage(view: ImageView, imgURl: String) {
 
-
-   // Log.wtf("RFCJ",imgURl)
     imgURl.let {
         val url = GlideUrl(
             it, LazyHeaders.Builder()
