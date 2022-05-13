@@ -1,18 +1,13 @@
 package com.example.week4challenge.photo
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.domain.entity.PhotoDomain
 import com.example.week4challenge.R
 import com.example.week4challenge.databinding.PhotoAdapterBinding
-import com.example.data.model.Photo
-import com.example.domain.entity.PhotoDomain
 import com.example.week4challenge.databinding.PhotoAdapterViewtype2Binding
-import java.lang.Exception
 
 class PhotoAdapter(val clickListener: PhotoClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -35,7 +30,6 @@ class PhotoAdapter(val clickListener: PhotoClickListener) :
                     LayoutInflater.from(parent.context),
                     R.layout.photo_adapter, parent, false
                 )
-                Log.wtf("rfcj", "cast del tipo 1$bindingType1")
 
                 PhotoViewHolder(bindingType1)
             }
@@ -45,7 +39,6 @@ class PhotoAdapter(val clickListener: PhotoClickListener) :
                     R.layout.photo_adapter_viewtype2, parent, false
 
                 )
-                Log.wtf("rfcj", "cast del tipo 2$bindingType2")
                 PhotoViewHolder2(bindingType2)
             }
             else -> {
@@ -99,5 +92,4 @@ class PhotoAdapter(val clickListener: PhotoClickListener) :
         }
         notifyDataSetChanged()
     }
-
 }

@@ -16,11 +16,9 @@ import com.example.week4challenge.R
 import com.example.week4challenge.databinding.FragmentPhotoBinding
 import com.example.week4challenge.photodetail.PhotoDetailFragment
 import dagger.hilt.android.AndroidEntryPoint
-//import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @AndroidEntryPoint
 class PhotoFragment : Fragment(), PhotoClickListener {
-
 
     private val photoViewModel by viewModels<PhotoViewModel>()
     private lateinit var photoAdapter: PhotoAdapter
@@ -32,63 +30,41 @@ class PhotoFragment : Fragment(), PhotoClickListener {
     ): View {
         mViewDataBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_photo, container, false)
-        val mRootView = mViewDataBinding.root
         mViewDataBinding.lifecycleOwner = this
-        return mRootView
-
+        return mViewDataBinding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setView()
-        mViewDataBinding.viewModel = photoViewModel
-        loadContent()
+        photoViewModel.getAllPhotos()
+        mViewDataBinding.rvPhotos.setHasFixedSize(true)
+        mViewDataBinding.rvPhotos.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        load()
 
         mViewDataBinding.swipeRefreshLayout.setOnRefreshListener {
-            loadContent()
+            load()
             mViewDataBinding.swipeRefreshLayout.isRefreshing = false
         }
     }
 
-
-    private fun loadContent() {
-        photoViewModel.getAllPhotos()
-
+    private fun load(){
         photoViewModel.photoRX?.subscribe {
+            photoAdapter = PhotoAdapter(this)
             photoAdapter.setPhotos(it)
+            mViewDataBinding.rvPhotos.adapter = photoAdapter
+            mViewDataBinding.rvPhotos.scrollToPosition(15)
         }
-
-/*
-        photoViewModel.photoList.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                if (it.isNotEmpty()) {
-                    photoAdapter.setPhotos(it)
-                }
-            }
-
-        })*/
+        mViewDataBinding.viewModel = photoViewModel
     }
 
-    private fun setView() {
-
-        photoAdapter = PhotoAdapter(this)
-        mViewDataBinding.rvPhotos.layoutManager =
-            LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        mViewDataBinding.rvPhotos.adapter = photoAdapter
-        mViewDataBinding.rvPhotos.isNestedScrollingEnabled = false
-
-
-    }
 
     override fun onItemClick(photo: PhotoDomain) {
-
         (activity as MainActivity).replaceFragment(
             PhotoDetailFragment.newInstance(photo),
             R.id.fragment_container,
             FRAGMENT_DESTINY
         )
     }
-
-
 }
